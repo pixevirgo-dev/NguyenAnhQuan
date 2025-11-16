@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link Bio | Your Name</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --bg: #050505;
+            --bg-soft: #111111;
+            --bg-card: #151515;
+            --accent: #ffffff;
+            --accent-soft: #999999;
+            --border-soft: rgba(255, 255, 255, 0.08);
+            --radius-xl: 22px;
+            --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            min-height: 100vh;
+            color: var(--accent);
+            background:
+                radial-gradient(circle at 0% 0%, #3c3c3c 0, transparent 50%),
+                radial-gradient(circle at 100% 100%, #444444 0, transparent 55%),
+                var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 12px;
+        }
+
+        .bio-wrapper {
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.9));
+            border-radius: 30px;
+            padding: 26px 22px 22px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Light gradient “stroke” */
+        .bio-wrapper::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.03));
+            -webkit-mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .bio-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Avatar & name */
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .avatar {
+            width: 68px;
+            height: 68px;
+            border-radius: 999px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .avatar::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+            pointer-events: none;
+        }
+
+        .profile-text {
+            flex: 1;
+        }
+
+        .name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.21em;
+            color: var(--accent-soft);
+            margin-top: 4px;
+        }
+
+        /* Bio short */
+        .bio {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 14px;
+        }
+
+        /* Social row */
+        .social-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .social-pill {
+            flex: 1;
+            font-size: 0.78rem;
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--border-soft);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.03);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .social-pill span.icon {
+            font-size: 0.9rem;
+        }
+
+        .social-pill:hover {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        /* Links list */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .link-item {
+            position: relative;
+            display: block;
+            width: 100%;
+            border-radius: var(--radius-xl);
+            padding: 12px 14px 11px;
+            border: 1px solid var(--border-soft);
+            background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.18), transparent 55%),
+                        radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.05), transparent 50%),
+                        rgba(0, 0, 0, 0.65);
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.16s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+        }
+
+        .link-main {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .link-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.5);
+            flex-shrink: 0;
+        }
+
+        .link-text-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .link-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .link-sub {
+            font-size: 0.75rem;
+            color: var(--accent-soft);
+        }
+
+        .link-arrow {
+            font-size: 0.9rem;
+            opacity: 0.75;
+        }
+
+        .link-item:hover {
+            transform: translateY(-1.5px);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.85);
+            border-color: rgba(255, 255, 255, 0.4);
+            background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.26), transparent 60%),
+                        radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.12), transparent 60%),
+                        rgba(0, 0, 0, 0.9);
+        }
+
+        /* Footer / copy link row */
+        .footer-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 0.75rem;
+            color: var(--accent-soft);
+        }
+
+        .copy-btn {
+            border-radius: 999px;
+            border: 1px solid var(--border-soft);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 6px 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.74rem;
+            cursor: pointer;
+            color: inherit;
+            transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
+        }
+
+        .copy-btn span {
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .copy-message {
+            font-size: 0.72rem;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.18s ease, transform 0.18s ease;
+        }
+
+        .copy-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            .bio-wrapper {
+                padding: 20px 16px 18px;
+            }
+            .profile {
+                gap: 12px;
+            }
+            .avatar {
+                width: 60px;
+                height: 60px;
+            }
+            .name {
+                font-size: 1.05rem;
+            }
+            .tagline {
+                font-size: 0.72rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="bio-wrapper">
+    <div class="bio-inner">
+        <!-- Profile -->
+        <div class="profile">
+            <div class="avatar">
+                <!-- ĐỔI LINK ẢNH AVATAR CỦA BẠN Ở ĐÂY -->
+                <img src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Avatar">
+            </div>
+            <div class="profile-text">
+                <!-- TÊN CỦA BẠN -->
+                <div class="name">Nguyễn Anh Quân</div>
+                <!-- DÒNG TAGLINE NGẮN -->
+                <div class="tagline">Web Developer • UI/UX Lover</div>
+            </div>
+        </div>
+
+        <!-- Mô tả ngắn -->
+        <p class="bio">
+            Xây dựng website & giao diện hiện đại, tối ưu trải nghiệm và chuyển đổi. 
+            Inbox để tư vấn miễn phí về giải pháp web cho thương hiệu của bạn.
+        </p>
+
+        <!-- Social quick links -->
+        <div class="social-row">
+            <a href="https://facebook.com" target="_blank" class="social-pill">
+                <span class="icon">📘</span> Facebook
+            </a>
+            <a href="https://www.instagram.com" target="_blank" class="social-pill">
+                <span class="icon">📸</span> Instagram
+            </a>
+            <a href="https://zalo.me" target="_blank" class="social-pill">
+                <span class="icon">💬</span> Zalo
+            </a>
+        </div>
+
+        <!-- Main links -->
+        <div class="links">
+            <!-- LINK 1: Dịch vụ thiết kế web -->
+            <a href="https://your-website.com/dich-vu-web" target="_blank" class="link-item">
+                <div class="link-main">
+                    <div class="link-icon">💻</div>
+                    <div class="link-text-wrapper">
+                        <div class="link-title">Thiết kế Website Trọn gói</div>
+                        <div class="link-sub">Chuẩn UX/UI • Chuẩn SEO • Tối ưu tốc độ</div>
+                    </div>
+                </div>
+                <div class="link-arrow">↗</div>
+            </a>
+
+            <!-- LINK 2: Portfolio -->
+            <a href="https://your-website.com/portfolio" target="_blank" class="link-item">
+                <div class="link-main">
+                    <div class="link-icon">🧩</div>
+                    <div class="link-text-wrapper">
+                        <div class="link-title">Xem Portfolio dự án</div>
+                        <div class="link-sub">Tổng hợp các website & dự án nổi bật</div>
+                    </div>
+                </div>
+                <div class="link-arrow">↗</div>
+            </a>
+
+            <!-- LINK 3: Blog chia sẻ -->
+            <a href="https://your-website.com/blog" target="_blank" class="link-item">
+                <div class="link-main">
+                    <div class="link-icon">✍️</div>
+                    <div class="link-text-wrapper">
+                        <div class="link-title">Blog: Marketing & Web</div>
+                        <div class="link-sub">Tips tăng chuyển đổi, chăm sóc khách hàng</div>
+                    </div>
+                </div>
+                <div class="link-arrow">↗</div>
+            </a>
+
+            <!-- LINK 4: Đặt lịch tư vấn -->
+            <a href="https://your-website.com/contact" target="_blank" class="link-item">
+                <div class="link-main">
+                    <div class="link-icon">📅</div>
+                    <div class="link-text-wrapper">
+                        <div class="link-title">Đặt lịch tư vấn 1:1</div>
+                        <div class="link-sub">Chọn khung giờ phù hợp với bạn</div>
+                    </div>
+                </div>
+                <div class="link-arrow">↗</div>
+            </a>
+        </div>
+
+        <!-- Footer row -->
+        <div class="footer-row">
+            <div>
+                © <span id="year"></span> • @yourusername
+            </div>
+            <button class="copy-btn" type="button" id="copyBtn">
+                <span>🔗</span> Copy link
+            </button>
+        </div>
+        <div class="copy-message" id="copyMessage">
+            Đã copy link bio ✨
+        </div>
+    </div>
+</div>
+
+<script>
+    // Auto set year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Copy current URL
+    const copyBtn = document.getElementById("copyBtn");
+    const copyMessage = document.getElementById("copyMessage");
+
+    copyBtn.addEventListener("click", async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            copyMessage.classList.add("show");
+            setTimeout(() => {
+                copyMessage.classList.remove("show");
+            }, 1800);
+        } catch (e) {
+            alert("Không copy được link, bạn hãy copy tay trên thanh địa chỉ nhé.");
+        }
+    });
+</script>
+</body>
+</html>
