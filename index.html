@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Link Bio | Nguyễn Anh Quân</title>
 
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <link rel="icon" href="5-removebg-preview.png" type="image/x-icon">
-</head>
 
     <style>
         :root {
@@ -52,9 +53,10 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             position: relative;
             overflow: hidden;
+            /* Để chiều cao thay đổi mượt mà nếu nội dung thay đổi */
+            transition: height 0.3s ease; 
         }
 
-        /* Light gradient “stroke” */
         .bio-wrapper::before {
             content: "";
             position: absolute;
@@ -99,15 +101,6 @@
             display: block;
         }
 
-        .avatar::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
-            pointer-events: none;
-        }
-
         .profile-text {
             flex: 1;
         }
@@ -127,7 +120,6 @@
             margin-top: 4px;
         }
 
-        /* Bio short */
         .bio {
             font-size: 0.85rem;
             line-height: 1.5;
@@ -160,8 +152,15 @@
             white-space: nowrap;
         }
 
-        .social-pill span.icon {
-            font-size: 0.9rem;
+        .social-pill i {
+            font-size: 1.3rem;
+        }
+
+        .zalo-img-icon {
+            width: 1.3rem;
+            height: 1.3rem;
+            object-fit: contain;
+            filter: grayscale(100%);
         }
 
         .social-pill:hover {
@@ -170,14 +169,31 @@
             border-color: rgba(255, 255, 255, 0.18);
         }
 
-        /* Links list */
+        /* Links list Container */
         .links {
             display: flex;
             flex-direction: column;
             gap: 10px;
             margin-bottom: 14px;
+            
+            /* Animation Transition properties */
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
+        /* --- Hiệu ứng Ẩn/Hiện --- */
+        .fade-out {
+            opacity: 0;
+            transform: translateY(15px);
+            pointer-events: none; 
+        }
+
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Link Item Styling */
         .link-item {
             position: relative;
             display: block;
@@ -213,7 +229,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             background: rgba(0, 0, 0, 0.5);
             flex-shrink: 0;
         }
@@ -234,8 +250,10 @@
         }
 
         .link-arrow {
-            font-size: 0.9rem;
+            font-size: 1.2rem;
             opacity: 0.75;
+            display: flex;
+            align-items: center;
         }
 
         .link-item:hover {
@@ -247,7 +265,7 @@
                         rgba(0, 0, 0, 0.9);
         }
 
-        /* Footer / copy link row */
+        /* Footer */
         .footer-row {
             display: flex;
             align-items: center;
@@ -271,8 +289,8 @@
             transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
         }
 
-        .copy-btn span {
-            font-size: 0.9rem;
+        .copy-btn i {
+            font-size: 1rem;
         }
 
         .copy-btn:hover {
@@ -286,6 +304,8 @@
             opacity: 0;
             transform: translateY(4px);
             transition: opacity 0.18s ease, transform 0.18s ease;
+            text-align: center;
+            margin-top: 5px;
         }
 
         .copy-message.show {
@@ -316,113 +336,144 @@
 <body>
 <div class="bio-wrapper">
     <div class="bio-inner">
-        <!-- Profile -->
         <div class="profile">
             <div class="avatar">
-                <!-- ĐỔI LINK ẢNH AVATAR CỦA BẠN Ở ĐÂY -->
                 <img src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Avatar">
             </div>
             <div class="profile-text">
-                <!-- TÊN CỦA BẠN -->
                 <div class="name">Nguyễn Anh Quân</div>
-                <!-- DÒNG TAGLINE NGẮN -->
                 <div class="tagline">Web Developer • UI/UX Lover</div>
             </div>
         </div>
 
-        <!-- Mô tả ngắn -->
         <p class="bio">
             Xây dựng website & giao diện hiện đại, tối ưu trải nghiệm và chuyển đổi. 
             Inbox để tư vấn miễn phí về giải pháp web cho thương hiệu của bạn.
         </p>
 
-        <!-- Social quick links -->
         <div class="social-row">
             <a href="https://www.facebook.com/profile.php?id=61584032600276" target="_blank" class="social-pill">
-                <span class="icon">📘</span> Facebook
+                <i class='bx bxl-facebook-circle'></i> Facebook
             </a>
             <a href="https://www.instagram.com/virgo.pixel/" target="_blank" class="social-pill">
-                <span class="icon">📸</span> Instagram
+                <i class='bx bxl-instagram'></i> Instagram
             </a>
             <a href="https://zalo.me/0356670293" target="_blank" class="social-pill">
-                <span class="icon">💬</span> Zalo
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="zalo-img-icon">
+                Zalo
             </a>
         </div>
 
-        <!-- Main links -->
-        <div class="links">
-            <!-- LINK 1: Dịch vụ thiết kế web -->
-            <a href="https://your-website.com/dich-vu-web" target="_blank" class="link-item">
+        <div class="links" id="main-menu">
+            <a href="#" target="_blank" class="link-item">
                 <div class="link-main">
-                    <div class="link-icon">💻</div>
+                    <div class="link-icon"><i class='bx bx-desktop'></i></div>
                     <div class="link-text-wrapper">
                         <div class="link-title">Thiết kế Website Trọn gói</div>
                         <div class="link-sub">Chuẩn UX/UI • Chuẩn SEO • Tối ưu tốc độ</div>
                     </div>
                 </div>
-                <div class="link-arrow">↗</div>
+                <div class="link-arrow"><i class='bx bx-chevron-right'></i></div>
             </a>
 
-            <!-- LINK 2: Portfolio -->
-            <a href="https://your-website.com/portfolio" target="_blank" class="link-item">
+            <div class="link-item" id="btn-portfolio">
                 <div class="link-main">
-                    <div class="link-icon">🧩</div>
+                    <div class="link-icon"><i class='bx bx-layer'></i></div>
                     <div class="link-text-wrapper">
                         <div class="link-title">Xem Portfolio dự án</div>
                         <div class="link-sub">Tổng hợp các website & dự án nổi bật</div>
                     </div>
                 </div>
-                <div class="link-arrow">↗</div>
-            </a>
+                <div class="link-arrow"><i class='bx bx-chevron-right'></i></div>
+            </div>
 
-            <!-- LINK 3: Blog chia sẻ -->
-            <a href="https://your-website.com/blog" target="_blank" class="link-item">
+            <a href="#" target="_blank" class="link-item">
                 <div class="link-main">
-                    <div class="link-icon">✍️</div>
+                    <div class="link-icon"><i class='bx bx-edit-alt'></i></div>
                     <div class="link-text-wrapper">
                         <div class="link-title">Blog: Marketing & Web</div>
                         <div class="link-sub">Tips tăng chuyển đổi, chăm sóc khách hàng</div>
                     </div>
                 </div>
-                <div class="link-arrow">↗</div>
+                <div class="link-arrow"><i class='bx bx-chevron-right'></i></div>
             </a>
 
-            <!-- LINK 4: Đặt lịch tư vấn -->
-            <a href="https://your-website.com/contact" target="_blank" class="link-item">
+            <a href="#" target="_blank" class="link-item">
                 <div class="link-main">
-                    <div class="link-icon">📅</div>
+                    <div class="link-icon"><i class='bx bx-calendar-check'></i></div>
                     <div class="link-text-wrapper">
                         <div class="link-title">Đặt lịch tư vấn 1:1</div>
                         <div class="link-sub">Chọn khung giờ phù hợp với bạn</div>
                     </div>
                 </div>
-                <div class="link-arrow">↗</div>
+                <div class="link-arrow"><i class='bx bx-chevron-right'></i></div>
             </a>
         </div>
 
-        <!-- Footer row -->
-        <div class="footer-row">
-            <div>
-                © <span id="year"></span> • @virgo.pixel
+        <div class="links" id="portfolio-menu" style="display: none; opacity: 0; transform: translateY(20px);">
+            <div class="link-item" id="btn-back" style="background: rgba(255,255,255,0.05); border-color: transparent;">
+                <div class="link-main">
+                    <div class="link-icon" style="background: transparent; border: none; padding-left: 0;">
+                        <i class='bx bx-arrow-back'></i>
+                    </div>
+                    <div class="link-text-wrapper">
+                        <div class="link-title">Quay lại</div>
+                    </div>
+                </div>
             </div>
+
+            <a href="#" target="_blank" class="link-item">
+                <div class="link-main">
+                    <div class="link-icon"><i class='bx bx-group'></i></div>
+                    <div class="link-text-wrapper">
+                        <div class="link-title">Web Cộng đồng</div>
+                        <div class="link-sub">Dự án social, forum, hội nhóm</div>
+                    </div>
+                </div>
+                <div class="link-arrow"><i class='bx bx-chevron-right'></i></div>
+            </a>
+
+            <a href="#" target="_blank" class="link-item">
+                <div class="link-main">
+                    <div class="link-icon"><i class='bx bx-cart'></i></div>
+                    <div class="link-text-wrapper">
+                        <div class="link-title">Web Có sẵn (Template)</div>
+                        <div class="link-sub">Mẫu đẹp, triển khai nhanh</div>
+                    </div>
+                </div>
+                <div class="link-arrow"><i class='bx bx-chevron-right'></i></div>
+            </a>
+
+            <a href="#" target="_blank" class="link-item">
+                <div class="link-main">
+                    <div class="link-icon"><i class='bx bx-check-shield'></i></div>
+                    <div class="link-text-wrapper">
+                        <div class="link-title">Web Đã làm</div>
+                        <div class="link-sub">Dự án thực tế cho khách hàng</div>
+                    </div>
+                </div>
+                <div class="link-arrow"><i class='bx bx-chevron-right'></i></div>
+            </a>
+        </div>
+
+        <div class="footer-row">
+            <div>© <span id="year"></span> • @virgo.pixel</div>
             <button class="copy-btn" type="button" id="copyBtn">
-                <span>🔗</span> Copy link
+                <i class='bx bx-link'></i> Copy link
             </button>
         </div>
         <div class="copy-message" id="copyMessage">
-            Đã copy link bio ✨
+            <i class='bx bx-check-circle'></i> Đã copy link bio
         </div>
     </div>
 </div>
 
 <script>
-    // Auto set year
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Copy current URL
     const copyBtn = document.getElementById("copyBtn");
     const copyMessage = document.getElementById("copyMessage");
 
+    // Xử lý nút Copy Link
     copyBtn.addEventListener("click", async () => {
         try {
             await navigator.clipboard.writeText(window.location.href);
@@ -433,6 +484,46 @@
         } catch (e) {
             alert("Không copy được link, bạn hãy copy tay trên thanh địa chỉ nhé.");
         }
+    });
+
+    // --- LOGIC CHUYỂN ĐỔI MENU ---
+    const mainMenu = document.getElementById('main-menu');
+    const portfolioMenu = document.getElementById('portfolio-menu');
+    const btnPortfolio = document.getElementById('btn-portfolio');
+    const btnBack = document.getElementById('btn-back');
+
+    // Hàm thực hiện chuyển đổi animation
+    function switchMenu(hideMenu, showMenu) {
+        // 1. Kích hoạt class ẩn cho menu hiện tại
+        hideMenu.classList.add('fade-out');
+        hideMenu.classList.remove('fade-in');
+
+        // 2. Chờ 300ms (bằng thời gian transition CSS)
+        setTimeout(() => {
+            hideMenu.style.display = 'none'; // Ẩn khỏi layout
+            showMenu.style.display = 'flex'; // Đưa menu mới vào layout
+
+            // Delay cực nhỏ để trình duyệt nhận diện thay đổi display
+            setTimeout(() => {
+                showMenu.classList.remove('fade-out');
+                showMenu.classList.add('fade-in');
+                // Reset style inline để class CSS có tác dụng
+                showMenu.style.opacity = '1';
+                showMenu.style.transform = 'translateY(0)';
+            }, 10);
+            
+        }, 300);
+    }
+
+    // Sự kiện khi bấm vào "Xem Portfolio"
+    btnPortfolio.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        switchMenu(mainMenu, portfolioMenu);
+    });
+
+    // Sự kiện khi bấm vào nút "Quay lại"
+    btnBack.addEventListener('click', () => {
+        switchMenu(portfolioMenu, mainMenu);
     });
 </script>
 </body>
